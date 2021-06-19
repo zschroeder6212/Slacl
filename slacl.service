@@ -1,0 +1,10 @@
+[Unit]
+Description=A platform for open-invite parties, gatherings, shindigs, and get-togethers
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/slacl
+ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5000 main:app
+
+[Install]
+WantedBy=multi-user.target
