@@ -1,16 +1,19 @@
+
+
 #chat_container {
-    width:30%;
+    width:50%;
     height: 590px;
     margin: 0 auto;
-    min-width:8in;
     margin-top: 0px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 #messages {
     border: 1px solid #0c0e0f;
     background-color: #0c0e0f;
-    height: 500px;
+    flex: 1 1 auto;
     width: 100%;
     margin:0 auto;
     overflow-y: scroll;
@@ -30,11 +33,15 @@ textarea {
     padding: 0;
 }
 
+#bottom_bar {
+    height: 60px;
+}
+
 #compose {
     border: none;
     resize: none;
     width: 80%;
-    height: 60px;
+    height: 100%;
     background-color: #2d3538;
     font-family: Arial;
     color: #d8dcdd;
@@ -76,7 +83,9 @@ button:active {
 
 #send {
     width: 20%;
-    height: 60px;
+    height: 100%;
+    float:right;
+    font-size: 16pt;
 }
 
 .messagewrp {
@@ -89,8 +98,33 @@ button:active {
     border-radius: 5px;
     font-family: Arial;
     padding: 10px;
+    margin-left: 20px;
 }
 
 .messagetxt {
     vertical-align: top;
+}
+@media only screen and (max-device-width: 480px) {
+    #chat_container {
+        width: 100%;
+        height: 100%;
+    }
+
+    #bottom_bar {
+        height: 120px;
+    }
+
+    #send {
+        font-size: 25pt;
+    }
+
+    .messagewrp{
+        padding: 25px 0;
+    }
+
+    .message {
+        font-size: 25pt;
+        height: 30px;
+        border-radius: 10px;
+    }
 }
