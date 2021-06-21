@@ -1,17 +1,30 @@
-from flask import Flask, send_from_directory, send_file
+from flask import Flask
+import static
+import chat
+import sqlite3
 
 app = Flask(__name__)
 
+app.add_url_rule('/', view_func=static.index, methods=['GET'])
+app.add_url_rule('/static/<path:path>', view_func=static.static_files, methods=['GET'])
 
-@app.route('/', methods=['GET'])
-def index():
-    return send_file("static/index.html")
+app.add_url_rule('/api/chat/messages', view_func=chat.get_messages, methods=['POST'])
+app.add_url_rule('/api/chat/send', view_func=chat.send_message, methods=['POST'])
 
 
-@app.route('/static/<path:path>', methods=['GET'])
-def static_files(path):
-    return send_from_directory('static', path)
+def init_db():
+    with sqlite3.connect("slacl.db") as conn:
+        cur = conn.cursor()
+        cur.execute("""CREATE TABLE IF NOT EXISTS Chat (
+                            body TEXT,
+                            time INTEGER,
+                            user_id TEXT,
+                            event_id TEXT
+                        )""")
+        conn.commit()
 
+
+init_db()
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
