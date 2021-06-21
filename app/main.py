@@ -2,14 +2,17 @@ from flask import Flask
 import static
 import chat
 import sqlite3
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+
+socketio = SocketIO(app)
 
 app.add_url_rule('/', view_func=static.index, methods=['GET'])
 app.add_url_rule('/static/<path:path>', view_func=static.static_files, methods=['GET'])
 
-app.add_url_rule('/api/chat/messages', view_func=chat.get_messages, methods=['POST'])
-app.add_url_rule('/api/chat/send', view_func=chat.send_message, methods=['POST'])
+socketio.on_event('send message', chat.send_message)
+socketio.on_event('join', chat.join)
 
 
 def init_db():
@@ -27,4 +30,4 @@ def init_db():
 init_db()
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    socketio.run(app, host='0.0.0.0')

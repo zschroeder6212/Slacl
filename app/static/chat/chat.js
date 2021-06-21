@@ -1,5 +1,3 @@
-var last_time = 0;
-
 function update_chat() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -19,17 +17,30 @@ function update_chat() {
     } );
 }
 
-$(function() {
-    update_chat();
-    setInterval(update_chat, 3000);
+var socket = io();
 
-    $("#send").click(function()
-    {
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var event_id = urlParams.get("event_id");
+
+$(() => {
+
+    socket.on('connect', () => {
+        socket.emit('join', {event_id: event_id});
+    });
+
+    socket.on('push message', (data) => {
+        data.messages.forEach((message) => {
+            $("#messages").append("<div class='messagewrp'><span class='message'><span class='messagetxt'>"+message.body+"</span></span></div>");
+        });
+        
+        $("#messages").scrollTop($("#messages")[0].scrollHeight);
+    });
+
+    $("#send").click(() => {
         const body = $("#compose").val();
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const event_id = urlParams.get("event_id");
-        $.post( "/api/chat/send", { body: body, event_id:  event_id}, update_chat );
+
+        socket.emit( "send message", { body: body, event_id: event_id} );
         $("#compose").val("");
     });
 });
