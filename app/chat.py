@@ -1,11 +1,9 @@
 import sqlite3
-import json
-from flask import request, Response, escape
+from flask import request, escape
 import time
 from flask_socketio import emit, join_room
 
 
-# path /api/chat/messages
 def get_all_messages(event_id):
     with sqlite3.connect("slacl.db") as conn:
         conn.row_factory = sqlite3.Row
@@ -19,10 +17,12 @@ def get_all_messages(event_id):
 
         return messages
 
+
 # 'join' websocket event handler
 def join(data):
     join_room(data['event_id'])
     emit("push message", get_all_messages(data['event_id']))
+
 
 # 'send message' websocket event handler
 def send_message(data):
