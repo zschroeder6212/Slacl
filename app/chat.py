@@ -21,23 +21,20 @@ def get_all_messages(event_id):
 # 'join' websocket event handler
 def join(data):
     join_room(data['event_id'])
-    emit("push message", get_all_messages(data['event_id']))
+    emit("init messages", get_all_messages(data['event_id']))
 
 
 # 'send message' websocket event handler
 def send_message(data):
     message = {
-        'messages': [{
-            'body': escape(data['body']),
-            'time': int(time.time()),
-            'user_id': request.remote_addr,  # using IP until I setup proper auth
-            'event_id': escape(data['event_id'])
-        }]
+        'body': escape(data['body']),
+        'time': int(time.time()),
+        'user_id': request.remote_addr,  # using IP until I setup proper auth
+        'event_id': escape(data['event_id'])
     }
 
-    print(message)
     with sqlite3.connect("slacl.db") as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO Chat VALUES (:body, :time, :user_id, :event_id)", message['messages'][0])
+        cur.execute("INSERT INTO Chat VALUES (:body, :time, :user_id, :event_id)", message)
         conn.commit()
     emit("push message", message, room=data['event_id'])

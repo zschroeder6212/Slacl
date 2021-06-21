@@ -29,11 +29,19 @@ $(() => {
         socket.emit('join', {event_id: event_id});
     });
 
-    socket.on('push message', (data) => {
+    socket.on('init messages', (data) => {
+        $("#messages").html("");
+
         data.messages.forEach((message) => {
             $("#messages").append("<div class='messagewrp'><span class='message'><span class='messagetxt'>"+message.body+"</span></span></div>");
         });
         
+        $("#messages").scrollTop($("#messages")[0].scrollHeight);
+    });
+
+    socket.on('push message', (data) => {
+        $("#messages").append("<div class='messagewrp'><span class='message'><span class='messagetxt'>"+data.body+"</span></span></div>");
+
         $("#messages").scrollTop($("#messages")[0].scrollHeight);
     });
 
