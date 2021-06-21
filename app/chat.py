@@ -10,7 +10,7 @@ def get_messages():
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         cur.execute("SELECT * FROM Chat WHERE event_id = :event_id AND time > :after", {'event_id': request.form['event_id'], 'after': request.form['after']})
-        
+
         response = {}
         response['messages'] = []
         for row in cur.fetchall():
@@ -25,10 +25,10 @@ def send_message():
         cur = conn.cursor()
         cur.execute("INSERT INTO Chat VALUES (:body, :time, :user_id, :event_id)",
                     {
-                        'body': request.form['body'],
+                        'body': escape(request.form['body']),
                         'time': int(time.time()),
                         'user_id': request.remote_addr,  # using IP until I setup proper auth
-                        'event_id': request.form['event_id']
+                        'event_id': escape(request.form['event_id'])
                     })
         conn.commit()
     return "OK"
