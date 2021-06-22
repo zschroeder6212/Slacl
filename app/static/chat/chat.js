@@ -6,7 +6,7 @@ function update_chat() {
     $.post( "/api/chat/messages", { event_id:  event_id, after: last_time}, function(data){
         data.messages.forEach(function(message)
         {
-            $("#messages").append("<div class='messagewrp'><span class='message'><span class='messagetxt'>"+message.body+"</span></span></div>");
+            $("#messages").append("<div class='messagewrp'><div class='message'><span class='messagetxt'>"+message.body+"</span></span></div>");
         });
 
         if(data.messages.length > 0)

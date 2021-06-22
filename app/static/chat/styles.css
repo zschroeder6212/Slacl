@@ -6,7 +6,7 @@
     margin: 0 auto;
     margin-top: 0px;
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
 }
 
@@ -34,7 +34,7 @@ textarea {
 }
 
 #bottom_bar {
-    height: 60px;
+    flex: 0 0 60px;
 }
 
 #compose {
@@ -89,21 +89,25 @@ button:active {
 }
 
 .messagewrp {
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .message {
     background: #0053ba;
     color: #d8dcdd;
-    border-radius: 5px;
+    border-radius: 30px;
     font-family: Arial;
-    padding: 10px;
+    padding: 10px 25px;
     margin-left: 20px;
+    margin-right: 20px;
+    display: inline-block;
 }
 
 .messagetxt {
     vertical-align: top;
+    overflow-wrap: break-word;
 }
+
 @media only screen and (max-device-width: 600px) {
     #chat_container {
         width: 100%;
@@ -111,7 +115,7 @@ button:active {
     }
 
     #bottom_bar {
-        height: 120px;
+        flex: 0 0 120px;
     }
 
     #send {
@@ -119,12 +123,17 @@ button:active {
     }
 
     .messagewrp{
-        padding: 25px 0;
+        padding: 30px 0;
     }
 
     .message {
-        font-size: 25pt;
-        height: 30px;
-        border-radius: 10px;
+        font-size: 35pt;
+        border-radius: 60px;
+        padding: 20px 50px;
+        
+    }
+
+    #compose {
+        font-size: 16pt;
     }
 }
