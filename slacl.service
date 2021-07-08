@@ -3,8 +3,7 @@ Description=A platform for open-invite parties, gatherings, shindigs, and get-to
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/slacl
-ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5000 main:app
+ExecStart=python3 /opt/slacl/main.py
 
 [Install]
 WantedBy=multi-user.target

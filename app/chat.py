@@ -1,34 +1,40 @@
 import sqlite3
-import json
-from flask import request, Response, escape
+from flask import request, escape
 import time
+from flask_socketio import emit, join_room
 
 
-# path /api/chat/messages
-def get_messages():
+def get_all_messages(event_id):
     with sqlite3.connect("slacl.db") as conn:
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-        cur.execute("SELECT * FROM Chat WHERE event_id = :event_id AND time > :after", {'event_id': request.form['event_id'], 'after': request.form['after']})
+        cur.execute("SELECT * FROM Chat WHERE event_id = :event_id", {'event_id': event_id})
 
-        response = {}
-        response['messages'] = []
+        messages = {}
+        messages['messages'] = []
         for row in cur.fetchall():
-            response['messages'].append(dict(row))
+            messages['messages'].append(dict(row))
 
-        return Response(json.dumps(response), mimetype='application/json')
+        return messages
 
 
-# path /api/chat/send
-def send_message():
+# 'join' websocket event handler
+def join(data):
+    join_room(data['event_id'])
+    emit("init messages", get_all_messages(data['event_id']))
+
+
+# 'send message' websocket event handler
+def send_message(data):
+    message = {
+        'body': escape(data['body']),
+        'time': int(time.time()),
+        'user_id': request.remote_addr,  # using IP until I setup proper auth
+        'event_id': escape(data['event_id'])
+    }
+
     with sqlite3.connect("slacl.db") as conn:
         cur = conn.cursor()
-        cur.execute("INSERT INTO Chat VALUES (:body, :time, :user_id, :event_id)",
-                    {
-                        'body': escape(request.form['body']),
-                        'time': int(time.time()),
-                        'user_id': request.remote_addr,  # using IP until I setup proper auth
-                        'event_id': escape(request.form['event_id'])
-                    })
+        cur.execute("INSERT INTO Chat VALUES (:body, :time, :user_id, :event_id)", message)
         conn.commit()
-    return "OK"
+    emit("push message", message, room=data['event_id'])
