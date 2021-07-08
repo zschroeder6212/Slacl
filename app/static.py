@@ -1,9 +1,9 @@
-from flask import send_file, send_from_directory
+from flask import render_template, send_from_directory
 
 
 # path /
 def index():
-    return send_file("static/index.html")
+    return render_template("index.html")
 
 
 # path /static/<path:path>

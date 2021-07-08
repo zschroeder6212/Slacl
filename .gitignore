@@ -138,3 +138,7 @@ dmypy.json
 cython_debug/
 
 *.db
+
+app/static/dist
+
+node_modules
