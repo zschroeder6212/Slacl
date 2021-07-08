@@ -1,0 +1,57 @@
+#navbar {
+    height: 60px;
+    display: flex;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+#navbar-left {
+    display: inline-block;
+    flex: 0 1 100%;
+    background-color: green;
+}
+
+#navbar-middle {
+    display: inline-block;
+    flex: none;
+    background-color: blue;
+    display: flex;
+    width: 500px;
+}
+
+@media only screen and (max-width: 700px) {
+    #navbar-middle {
+        width: 100vw;
+    }
+}
+
+#navbar-middle li {
+    width: 60px;
+    cursor: pointer;
+    flex: 0 1 100%;
+}
+
+#navbar-middle li:hover {
+    background-color: red;
+}
+
+#navbar-right {
+    display: inline-block;
+    flex: 0 1 100%;
+    background-color: yellow;
+}
