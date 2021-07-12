@@ -1,0 +1,38 @@
+.event {
+    box-sizing: border-box ! important;
+    background-color: #161b22;
+    width: 100%;
+    min-height: 200px;
+    margin: 10px 0;
+    font-family: Arial;
+    color: rgb(190, 190, 190);
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #161b22;
+}
+
+.event:hover {
+    border: 1px solid rgb(190, 190, 190);
+}
+
+.event-header {
+    background-color: #232e3d;
+    border-radius: 5px 5px 0 0;
+    height: 60px;
+    line-height: 60px;
+    position:relative;
+}
+
+.event-title {
+    font-size: 20pt;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+.event-content {
+    padding: 0 20px 40px 20px;
+}
+
+.event-body {
+    font-size: 15pt;
+}

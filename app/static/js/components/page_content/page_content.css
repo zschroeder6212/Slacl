@@ -1,0 +1,29 @@
+#page-content {
+    flex: 0 1 100%;
+    background-color: #0d1117;
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+}
+
+#content-left {
+    flex: 0 1 100%;
+}
+
+#content-center {
+    flex: none;
+    width: 700px;
+}
+
+@media only screen and (max-width: 700px) {
+    #content-right, #content-left{ 
+        display: none !important;
+    }
+    #content-center {
+        width: 100%;
+    }
+}
+
+#content-right {
+    flex: 0 1 100%;
+}

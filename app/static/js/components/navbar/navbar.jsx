@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFire, faGlobe, faUserFriends, faBell } from '@fortawesome/free-solid-svg-icons'
 
 import "./navbar.css"
 
@@ -7,7 +9,7 @@ class LeftSegment extends React.Component {
     render () {
         return (
             <ul id="navbar-left">
-
+                <li id="banner">Slacl</li>
             </ul>
         )
     }
@@ -17,10 +19,9 @@ class MiddleSegment extends React.Component {
     render () {
         return (
             <ul id="navbar-middle">
-                <li><svg focusable="false" viewBox="0 0 24 24"><path d="M12 11h6v2h-6v-2zm-6 6h12v-2H6v2zm0-4h4V7H6v6zm16-7.22v12.44c0 1.54-1.34 2.78-3 2.78H5c-1.64 0-3-1.25-3-2.78V5.78C2 4.26 3.36 3 5 3h14c1.64 0 3 1.25 3 2.78zM19.99 12V5.78c0-.42-.46-.78-1-.78H5c-.54 0-1 .36-1 .78v12.44c0 .42.46.78 1 .78h14c.54 0 1-.36 1-.78V12zM12 9h6V7h-6v2"></path></svg></li>
-                <li><svg focusable="false" viewBox="0 0 24 24"><path d="M12 11h6v2h-6v-2zm-6 6h12v-2H6v2zm0-4h4V7H6v6zm16-7.22v12.44c0 1.54-1.34 2.78-3 2.78H5c-1.64 0-3-1.25-3-2.78V5.78C2 4.26 3.36 3 5 3h14c1.64 0 3 1.25 3 2.78zM19.99 12V5.78c0-.42-.46-.78-1-.78H5c-.54 0-1 .36-1 .78v12.44c0 .42.46.78 1 .78h14c.54 0 1-.36 1-.78V12zM12 9h6V7h-6v2"></path></svg></li>
-                <li><svg focusable="false" viewBox="0 0 24 24"><path d="M12 11h6v2h-6v-2zm-6 6h12v-2H6v2zm0-4h4V7H6v6zm16-7.22v12.44c0 1.54-1.34 2.78-3 2.78H5c-1.64 0-3-1.25-3-2.78V5.78C2 4.26 3.36 3 5 3h14c1.64 0 3 1.25 3 2.78zM19.99 12V5.78c0-.42-.46-.78-1-.78H5c-.54 0-1 .36-1 .78v12.44c0 .42.46.78 1 .78h14c.54 0 1-.36 1-.78V12zM12 9h6V7h-6v2"></path></svg></li>
-                <li><svg focusable="false" viewBox="0 0 24 24"><path d="M12 11h6v2h-6v-2zm-6 6h12v-2H6v2zm0-4h4V7H6v6zm16-7.22v12.44c0 1.54-1.34 2.78-3 2.78H5c-1.64 0-3-1.25-3-2.78V5.78C2 4.26 3.36 3 5 3h14c1.64 0 3 1.25 3 2.78zM19.99 12V5.78c0-.42-.46-.78-1-.78H5c-.54 0-1 .36-1 .78v12.44c0 .42.46.78 1 .78h14c.54 0 1-.36 1-.78V12zM12 9h6V7h-6v2"></path></svg></li>
+                <li className="selected"><FontAwesomeIcon className="icon" icon={faFire} /></li>
+                <li><FontAwesomeIcon className="icon" icon={faGlobe} /></li>
+                <li><FontAwesomeIcon className="icon" icon={faUserFriends} /></li>
             </ul>
         )
     }
@@ -30,7 +31,8 @@ class RightSegment extends React.Component {
     render () {
         return (
             <ul id="navbar-right">
-
+                <li><img className="icon" src="https://scontent.ffcm1-2.fna.fbcdn.net/v/t1.6435-1/cp0/p50x50/61787536_2263405003872267_4864331250501943296_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=7206a8&_nc_ohc=JrWqe1JGqYgAX-Uo-sv&_nc_ht=scontent.ffcm1-2.fna&oh=09d03f62b24b01e84dbb0ff78026e022&oe=60EF559E" /></li>
+                <li><FontAwesomeIcon className="icon" id="notifications" icon={faBell} /></li>
             </ul>
         )
     }

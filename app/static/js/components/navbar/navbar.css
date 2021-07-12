@@ -1,6 +1,13 @@
+@font-face {
+    font-family: roboto;
+    src: url("../../../font/Roboto-Thin.woff2");
+}
+
+
 #navbar {
     height: 60px;
     display: flex;
+    background-color: #161b22;
 }
 
 #navbar ul {
@@ -11,47 +18,102 @@
 
 #navbar li {
     display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
-
-svg {
-    width: 100%;
-    height: 100%;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    position:relative;
 }
 
 #navbar-left {
     display: inline-block;
     flex: 0 1 100%;
-    background-color: green;
+}
+
+#banner {
+    font-family: monospace;;
+    font-size: 28px;
+    color: #f8485f;
+    vertical-align: middle;
+    margin-left: 40px;
 }
 
 #navbar-middle {
     display: inline-block;
     flex: none;
-    background-color: blue;
     display: flex;
     width: 500px;
+}
+
+#navbar-middle .icon {
+    width: 100%;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.icon path {
+    fill: rgb(172, 172, 172);
+}
+
+#navbar-middle li:hover {
+    background-color: #232e3d;
+}
+
+#navbar-middle .selected path {
+    fill: #f8485f;
+    filter: drop-shadow(0 0 40px #a75560) !important;
+}
+
+@media only screen and (max-width: 1000px) {
+    #navbar-left{
+        display: none !important;
+    }
+
+    #navbar-right{
+        flex: none !important;
+    }
+
+    #navbar-middle {
+        flex: 0 1 100% !important;
+    }
 }
 
 @media only screen and (max-width: 700px) {
     #navbar-middle {
         width: 100vw;
     }
+
+    #navbar-left{
+        display: none !important;
+    }
+
+    #navbar-right{
+        display: none !important;
+    }
 }
 
 #navbar-middle li {
     width: 60px;
-    cursor: pointer;
     flex: 0 1 100%;
-}
-
-#navbar-middle li:hover {
-    background-color: red;
 }
 
 #navbar-right {
     display: inline-block;
     flex: 0 1 100%;
-    background-color: yellow;
+}
+
+#navbar-right li {
+    width: 60px;
+    float: right;
+}
+
+#navbar-right .icon {
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}
+
+#navbar-right #notifications.icon {
+    width: 20px !important;
+    height: 20px !important;
 }

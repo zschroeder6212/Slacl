@@ -2,3 +2,10 @@ html, body {
     height: 100vh;
     width:100vw;
 }
+
+#react-entrypoint {
+    display:flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
