@@ -1,4 +1,4 @@
-.PHONY: bootstrap clean lint test
+.PHONY: start-dev build-prod bootstrap clean lint test
 .DEFAULT_GOAL := test
 
 test: lint
@@ -10,12 +10,19 @@ lint:
 clean:
 	@find . -type f -name '*.pyc' -delete
 
+start-dev:
+	@yarn webpack --mode development --watch & ./venv/bin/python3 ./app/main.py
+
 bootstrap:
 	@pip install -r requirements.txt
 	@pip install -r requirements-test.txt
 	@python setup.py develop
+	@yarn install
 
-install: bootstrap
+build-prod: bootstrap
+	@yarn webpack --mode production
+
+install: build-prod
 	@mkdir -p /opt/slacl
 	@cp -a ./app/* /opt/slacl
 	@cp slacl.service /etc/systemd/system/slacl.service

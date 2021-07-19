@@ -1,0 +1,27 @@
+{
+  "name": "slacl",
+  "version": "0.0.1",
+  "main": "app/static/js/index.jsx",
+  "repository": "git@github.com:zschroeder6212/Slacl.git",
+  "author": "zschroeder6212@gmail.com <zschroeder6212@gmail.com>",
+  "license": "GPL",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.43.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
