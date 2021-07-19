@@ -5,7 +5,7 @@
     min-height: 200px;
     margin: 10px 0;
     font-family: Arial;
-    color: rgb(190, 190, 190);
+    color: #d6dce4;
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid #161b22;
@@ -24,7 +24,7 @@
 }
 
 .event-title {
-    font-size: 20pt;
+    font-size: 20px;
     vertical-align: middle;
     margin-left: 20px;
 }
@@ -34,5 +34,8 @@
 }
 
 .event-body {
-    font-size: 15pt;
+    max-height: 100px;
+    font-size: 15px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
 }
