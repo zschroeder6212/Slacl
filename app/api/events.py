@@ -20,7 +20,8 @@ class Events:
                                 stars INTEGER,
                                 time INTEGER,
                                 user_id TEXT,
-                                event_id TEXT
+                                event_id TEXT,
+                                area_id TEXT
                             )""")
             conn.commit()
 
@@ -33,19 +34,17 @@ class Events:
 
             return dict(cur.fetchall()[0])
 
-    def get_events_list(self, order):
+    def get_events_by_area(self, area_id, order):
         """Get list of events"""
         with sqlite3.connect(self.db) as conn:
             conn.row_factory = sqlite3.Row
             cur = conn.cursor()
 
             """gonna need better filtering"""
-            match order:
-                case "new":
-                    cur.execute("SELECT event_id FROM Events ORDER BY time DESC")
-                case "hot":
-                    cur.execute("SELECT event_id FROM Events ORDER BY stars DESC")
-                
+            if order == 'new':
+                cur.execute("SELECT event_id FROM Events WHERE area_id = :area_id ORDER BY time DESC", {'area_id': area_id})
+            elif order == 'hot':
+                cur.execute("SELECT event_id FROM Events WHERE area_id = :area_id ORDER BY stars DESC", {'area_id': area_id})
 
             events = {}
             events['events'] = []
@@ -62,12 +61,13 @@ class Events:
             'stars': 0,
             'time': int(time.time()),
             'user_id': request.json.get('user_id'),  # using IP until I setup proper auth
-            'event_id': uuid4().hex
+            'event_id': uuid4().hex,
+            'area_id': request.json.get('area_id')
         }
 
         with sqlite3.connect(self.db) as conn:
             cur = conn.cursor()
-            cur.execute("INSERT INTO Events VALUES (:title, :body, :stars, :time, :user_id, :event_id)", event)
+            cur.execute("INSERT INTO Events VALUES (:title, :body, :stars, :time, :user_id, :event_id, :area_id)", event)
             conn.commit()
-            
+
         return ('', 200)
