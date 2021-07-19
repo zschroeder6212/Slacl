@@ -3,6 +3,7 @@ from flask import request, escape
 import time
 from flask_socketio import emit, join_room
 
+
 class Chat:
     def __init__(self):
         with sqlite3.connect("slacl.db") as conn:
@@ -28,12 +29,10 @@ class Chat:
 
             return messages
 
-
     # 'join' websocket event handler
     def join(self, data):
         join_room(data['event_id'])
-        emit("init messages", get_all_messages(data['event_id']))
-
+        emit("init messages", self.get_all_messages(data['event_id']))
 
     # 'send message' websocket event handler
     def send_message(data):

@@ -1,7 +1,6 @@
 from flask import Flask
 import static
 from chat import Chat
-import sqlite3
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
