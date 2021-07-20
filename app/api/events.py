@@ -71,3 +71,10 @@ class Events:
             conn.commit()
 
         return ('', 200)
+    
+    def star_event(self, event_id):
+        with sqlite3.connect(self.db) as conn:
+            cur = conn.cursor()
+            cur.execute("UPDATE Events SET stars = stars + 1 WHERE event_id = :event_id", {'event_id': event_id})
+            conn.commit()
+        return '', 200

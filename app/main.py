@@ -18,6 +18,7 @@ app.add_url_rule('/static/<path:path>', view_func=static.static_files, methods=[
 app.add_url_rule('/api/events/create_event', view_func=events.create_event, methods=['POST'])
 app.add_url_rule('/api/events/get_events_by_area/<area_id>/<order>', view_func=events.get_events_by_area, methods=['GET'])
 app.add_url_rule('/api/events/get_event_details/<event_id>', view_func=events.get_event_details, methods=['GET'])
+app.add_url_rule('/api/events/star/<event_id>', view_func=events.star_event, methods=['GET'])
 
 socketio.on_event('send message', chat.send_message)
 socketio.on_event('join', chat.join)
