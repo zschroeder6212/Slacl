@@ -60,7 +60,7 @@ class Events:
             'body': escape(request.json.get('body')),
             'stars': 0,
             'time': int(time.time()),
-            'user_id': request.json.get('user_id'),  # using IP until I setup proper auth
+            'user_id': request.json.get('user_id'),
             'event_id': uuid4().hex,
             'area_id': request.json.get('area_id')
         }
