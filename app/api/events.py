@@ -4,6 +4,7 @@ from flask import request, escape
 import time
 from flask_login import login_required, current_user
 
+
 class Events:
     def __init__(self, db):
         """Init"""
@@ -72,7 +73,7 @@ class Events:
             conn.commit()
 
         return ('', 200)
-    
+
     @login_required
     def star_event(self, event_id):
         with sqlite3.connect(self.db) as conn:

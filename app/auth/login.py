@@ -1,12 +1,10 @@
-# AS simeple as possbile flask google oAuth 2.0
-from flask import Flask, redirect, url_for
+from flask import redirect, url_for
 from authlib.integrations.flask_client import OAuth
-import os
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user
 import sqlite3
-import json
 
 from auth.user import User
+
 
 class Login:
     def __init__(self, app, db, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET):
@@ -62,12 +60,10 @@ class Login:
         redirect_uri = url_for('authorize', _external=True)
         return google.authorize_redirect(redirect_uri)
 
-
     def authorize(self):
         google = self.oauth.create_client('google')
-        token = google.authorize_access_token()
-        resp = google.get('userinfo')
-        user_info = resp.json()
+        google.authorize_access_token()
+        user_info = google.get('userinfo').json()
         user = User(user_info, self.db)
         login_user(user)
 
