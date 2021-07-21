@@ -2,6 +2,7 @@ import sqlite3
 from flask import escape
 import time
 from flask_socketio import emit, join_room
+from flask_login import current_user
 
 
 class Chat:
@@ -44,7 +45,7 @@ class Chat:
         message = {
             'body': escape(data['body']),
             'time': int(time.time()),
-            'user_id': data['user_id'],  # using IP until I setup proper auth
+            'user_id': current_user.get_id(),
             'event_id': data['event_id']
         }
 

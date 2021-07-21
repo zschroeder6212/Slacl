@@ -2,7 +2,7 @@ import sqlite3
 from uuid import uuid4
 from flask import request, escape
 import time
-
+from flask_login import login_required, current_user
 
 class Events:
     def __init__(self, db):
@@ -53,6 +53,7 @@ class Events:
 
             return events
 
+    @login_required
     def create_event(self):
         """Create event"""
         event = {
@@ -60,7 +61,7 @@ class Events:
             'body': escape(request.json.get('body')),
             'stars': 0,
             'time': int(time.time()),
-            'user_id': request.json.get('user_id'),
+            'user_id': current_user.get_id(),
             'event_id': uuid4().hex,
             'area_id': request.json.get('area_id')
         }
@@ -72,6 +73,7 @@ class Events:
 
         return ('', 200)
     
+    @login_required
     def star_event(self, event_id):
         with sqlite3.connect(self.db) as conn:
             cur = conn.cursor()
